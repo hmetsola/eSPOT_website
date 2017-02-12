@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1"/>
+<title>eSPOT - League of Legends</title>
+<link rel="stylesheet" type="text/css" href="../../styles/styles.css" />
+<meta name="description" content="League of Legends">
+<meta name="keywords" content="eSPOT, e-sports, games, league of legends, portal">
+<meta name="author" content="5MAG Entertainment OY">
+<script src="../../scripts/filereader.js" type="text/javascript"></script> 
+<script src="../../scripts/jquery-3.1.1.js" type="text/javascript"></script> 
+<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script> 
+
+</head>
+
+<body class = "body" onload="socket.emit('mainfetch', 'games/lol/database/info');">
+	
+		
+	<div class = "container">
+		<script>
+		var socket = io.connect();
+		//var socket = io.connect('http://espottest-espotdevs.44fs.preview.openshiftapps.com', {'forceNew':true});
+		//var socket = io.connect('localhost:8080/', {'forceNew':true});
+		
+		socket.on('filereturn', createContentButtons);
+		</script>
+		<div class = "sidebar">				
+			<a href="../../index.html"><img src="../../images/hexat_ikonit/espot_ikonit_eSPOT.svg" class="headerlogo" ></a>	<br>
+			 <div class="separator"><h4>TIER I</h4></div>
+			 
+			 <nav id="mainmenu">	
+				<div class="main_button active" id="info"><h4>INFO</h4><img src="../../images/hexat_ikonit/espot_ikonit_league.svg"/></div>
+				<div class="main_button" id="tools" ><h4>TOOLS</h4><img style="width:73%;padding-left:15%;padding-top:26%;" src="../../images/hexat_ikonit/espot_ikonit_kadet.svg" /></div>
+				
+			</nav> 
+			
+			<div class="separator"><h4>TIER II</h4></div>
+			
+			<nav id="tier2">
+					
+			</nav>
+			
+			<div class="separator"><h4>TIER III</h4></div>
+			
+			<nav class="contentmenu" id="content_buttons"></nav>
+		
+		</div>
+			
+		<div class = "content_text" id="text-file">
+		
+		</div>
+		<canvas id="content_scrollbar"></canvas>
+		
+		
+		</div>
+	<script type="text/javascript">
+			
+			<!-- var scrollbarpos = document.getElementById("content_scrollbar").getBoundingClientRect().left -30; -->
+			var activeid = "info";
+			var header = document.getElementById("header");					
+			var mainmenu = document.getElementById("mainmenu");					
+			mainmenu.addEventListener("click", makeMainClick );		
+			var activebutton = 0;
+			var buttondivs = mainmenu.getElementsByClassName("main_button");
+			var offset = 0; //mainmenu.getBoundingClientRect().top + 20;
+			buttondivs[0].style.top = offset +"px";
+			setMainButtons();					
+			var tier2menu = document.getElementById("tier2");	
+			tier2menu.addEventListener("click", makeTier2Click );	
+			var contentmenu = document.getElementById("content_buttons");	
+			//var headerHeight = contentmenu.getBoundingClientRect().top;
+			contentmenu.addEventListener("click", makeContentClick );			
+			//var images = mainmenu.getElementsByTagName("img");
+			var textfield = document.getElementById("text-file");
+				
+			textfield.addEventListener("scroll", checkHeader);			
+			var c=document.getElementById("content_scrollbar");
+			c.width = 30;
+			c.height =  document.getElementById("text-file").getBoundingClientRect().height;				
+			var ctx=c.getContext("2d");	
+			active = "#FF0000";
+			basic = "#777777";
+			ctx.lineWidth = 5;
+			ctx.strokeStyle = basic;
+			var middle = c.width/2;			
+			var counter = 0;
+			
+	</script>
+</body>
+</html>
